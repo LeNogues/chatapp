@@ -41,7 +41,7 @@ export default function App() {
   }
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout${selectedRoom ? " chat-open" : ""}`}>
       <Sidebar
         selectedRoom={selectedRoom}
         onSelectRoom={setSelectedRoom}
@@ -53,6 +53,7 @@ export default function App() {
             key={selectedRoom._id}
             room={selectedRoom}
             currentUser={currentUser}
+            onBack={() => setSelectedRoom(null)}
           />
         ) : (
           <WelcomeScreen />

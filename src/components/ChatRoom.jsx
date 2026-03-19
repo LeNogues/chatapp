@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import InviteModal from "./InviteModal";
 
-export default function ChatRoom({ room, currentUser }) {
+export default function ChatRoom({ room, currentUser, onBack }) {
   const messages = useQuery(api.messages.getMessages, { roomId: room._id }) ?? [];
   const members = useQuery(api.rooms.getRoomMembers, { roomId: room._id }) ?? [];
   const sendMessage = useMutation(api.messages.sendMessage);
@@ -51,6 +51,7 @@ export default function ChatRoom({ room, currentUser }) {
       {/* Header */}
       <div className="chat-header">
         <div className="chat-header-left">
+          <button className="btn-back-mobile" onClick={onBack} title="Retour">‹</button>
           <span className="chat-room-hash">#</span>
           <span className="chat-room-title">{room.name}</span>
           <span className="chat-member-count">{members.length} membre{members.length > 1 ? "s" : ""}</span>

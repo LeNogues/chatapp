@@ -672,3 +672,117 @@ html, body, #root {
   border-radius: 6px;
   padding: 8px;
 }
+
+/* ===== BOUTON RETOUR MOBILE (caché sur desktop) ===== */
+.btn-back-mobile {
+  display: none;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 640px) {
+
+  /* Layout : on empile sidebar et main, chacun plein écran */
+  .app-layout {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sidebar : visible par défaut, cachée quand une room est ouverte */
+  .sidebar {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 10;
+    transition: transform 0.25s ease;
+    transform: translateX(0);
+  }
+
+  .app-layout.chat-open .sidebar {
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  /* Chat main : caché par défaut, visible quand une room est ouverte */
+  .chat-main {
+    width: 100%;
+    transition: transform 0.25s ease;
+    transform: translateX(100%);
+  }
+
+  .app-layout.chat-open .chat-main {
+    transform: translateX(0);
+  }
+
+  /* Bouton retour : visible uniquement sur mobile */
+  .btn-back-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 8px 0 0;
+    transition: color 0.15s;
+  }
+  .btn-back-mobile:hover { color: #fff; }
+
+  /* Header chat : ajuster pour mobile */
+  .chat-header {
+    padding: 0 10px;
+  }
+
+  .chat-header-right .btn-secondary,
+  .chat-header-right .btn-danger-sm {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  /* Messages : bulles plus larges */
+  .message-content {
+    max-width: 80%;
+  }
+
+  /* Input : bouton "Envoyer" réduit */
+  .chat-input-bar {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .chat-send-btn {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  /* Modals : plein écran sur mobile */
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .modal-overlay {
+    align-items: flex-end;
+  }
+
+  .modal-body {
+    max-height: 50vh;
+  }
+
+  /* Sidebar : boutons plus grands pour le tactile */
+  .sidebar-btn {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .room-item {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+}
