@@ -20,14 +20,17 @@ export default function AuthPage() {
     setLoading(true);
     try {
       if (mode === "register") {
-        // Stocker le displayName avant signIn car le token auth n'est pas
-        // encore dispo pour les mutations juste apres signIn
         sessionStorage.setItem("pendingDisplayName", displayName || email.split("@")[0]);
-        await signIn("password", { email, password, flow: "signUp" });
+        console.log("[AUTH] signUp en cours...");
+        const result = await signIn("password", { email, password, flow: "signUp" });
+        console.log("[AUTH] signUp résultat:", result);
       } else {
-        await signIn("password", { email, password, flow: "signIn" });
+        console.log("[AUTH] signIn en cours...");
+        const result = await signIn("password", { email, password, flow: "signIn" });
+        console.log("[AUTH] signIn résultat:", result);
       }
     } catch (err) {
+      console.error("[AUTH] Erreur complète:", err);
       setError(err.message || "Une erreur est survenue");
     } finally {
       setLoading(false);
