@@ -20,8 +20,10 @@ export default function AuthPage() {
     setLoading(true);
     try {
       if (mode === "register") {
+        // Stocker le displayName avant signIn car le token auth n'est pas
+        // encore dispo pour les mutations juste apres signIn
+        sessionStorage.setItem("pendingDisplayName", displayName || email.split("@")[0]);
         await signIn("password", { email, password, flow: "signUp" });
-        await setDisplayName({ displayName: displayName || email.split("@")[0] });
       } else {
         await signIn("password", { email, password, flow: "signIn" });
       }
