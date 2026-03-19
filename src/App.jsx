@@ -14,6 +14,10 @@ export default function App() {
   const setDisplayName = useMutation(api.users.setDisplayName);
   const [selectedRoom, setSelectedRoom] = useState(null);
 
+  useEffect(() => {
+    console.log("[APP] isAuthenticated:", isAuthenticated, "| isLoading:", isLoading);
+  }, [isAuthenticated, isLoading]);
+
   // Applique le displayName en attente apres que l'auth soit completement etablie
   useEffect(() => {
     if (!isAuthenticated) return;
